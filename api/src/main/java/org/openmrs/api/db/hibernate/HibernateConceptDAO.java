@@ -240,7 +240,8 @@ public class HibernateConceptDAO implements ConceptDAO {
 	 */
 	@Override
 	public Concept getConcept(Integer conceptId) throws DAOException {
-		return (Concept) sessionFactory.getCurrentSession().get(Concept.class, conceptId);
+		return sessionFactory.getCurrentSession().get(Concept.class, conceptId);
+
 	}
 	
 	/**
@@ -248,7 +249,8 @@ public class HibernateConceptDAO implements ConceptDAO {
 	 */
 	@Override
 	public ConceptName getConceptName(Integer conceptNameId) throws DAOException {
-		return (ConceptName) sessionFactory.getCurrentSession().get(ConceptName.class, conceptNameId);
+		return sessionFactory.getCurrentSession().get(ConceptName.class, conceptNameId);
+
 	}
 	
 	/**
@@ -256,7 +258,7 @@ public class HibernateConceptDAO implements ConceptDAO {
 	 */
 	@Override
 	public ConceptAnswer getConceptAnswer(Integer conceptAnswerId) throws DAOException {
-		return (ConceptAnswer) sessionFactory.getCurrentSession().get(ConceptAnswer.class, conceptAnswerId);
+		return sessionFactory.getCurrentSession().get(ConceptAnswer.class, conceptAnswerId);
 	}
 	
 	/**
@@ -313,7 +315,7 @@ public class HibernateConceptDAO implements ConceptDAO {
 		
 		hql += asc ? " asc" : " desc";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		return (List<Concept>) query.list();
+		return query.list();
 	}
 	
 	/**
@@ -330,7 +332,8 @@ public class HibernateConceptDAO implements ConceptDAO {
 	 */
 	@Override
 	public Drug getDrug(Integer drugId) throws DAOException {
-		return (Drug) sessionFactory.getCurrentSession().get(Drug.class, drugId);
+		return sessionFactory.getCurrentSession().get(Drug.class, drugId);
+
 	}
 	
 	/**
@@ -369,6 +372,7 @@ public class HibernateConceptDAO implements ConceptDAO {
 		searchDrugCriteria.add(Restrictions.or(lhs, rhs));
 		
 		return (List<Drug>) searchDrugCriteria.list();
+
 	}
 	
 	/**
@@ -453,6 +457,7 @@ public class HibernateConceptDAO implements ConceptDAO {
 	@Override
 	public ConceptDatatype getConceptDatatype(Integer i) {
 		return (ConceptDatatype) sessionFactory.getCurrentSession().get(ConceptDatatype.class, i);
+		
 	}
 	
 	/**
@@ -832,12 +837,10 @@ public class HibernateConceptDAO implements ConceptDAO {
 				parents.addAll(getParents(c));
 			}
 			parents.add(current);
-			if (log.isDebugEnabled()) {
-				log.debug("parents found: ");
+			log.debug("parents found: ");
 				for (Concept c : parents) {
-					log.debug("id: " + c.getConceptId());
+				log.debug("id: {}", c.getConceptId());
 				}
-			}
 		}
 		return parents;
 	}

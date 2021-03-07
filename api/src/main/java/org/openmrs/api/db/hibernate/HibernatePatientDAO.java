@@ -81,7 +81,7 @@ public class HibernatePatientDAO implements PatientDAO {
 	 */
         @Override
 	public Patient getPatient(Integer patientId) {
-		return (Patient) sessionFactory.getCurrentSession().get(Patient.class, patientId);
+        	return (Patient) sessionFactory.getCurrentSession().get(Patient.class, patientId);
 	}
 	
 	/**
@@ -164,6 +164,7 @@ public class HibernatePatientDAO implements PatientDAO {
 		
 	}
 	
+	@Override
 	public List<Patient> getPatients(String query, List<PatientIdentifierType> identifierTypes,
 		boolean matchIdentifierExactly, Integer start, Integer length) throws DAOException{
 		
@@ -226,9 +227,7 @@ public class HibernatePatientDAO implements PatientDAO {
 		if (length != null && length < maximumSearchResults) {
 			criteria.setMaxResults(length);
 		} else {
-			if (log.isDebugEnabled()) {
-				log.debug("Limiting the size of the number of matching patients to " + maximumSearchResults);
-			}
+			log.debug("Limiting the size of the number of matching patients to {}", maximumSearchResults);
 			criteria.setMaxResults(maximumSearchResults);
 		}
 	}
@@ -320,7 +319,7 @@ public class HibernatePatientDAO implements PatientDAO {
 	 */
         @Override
 	public PatientIdentifierType getPatientIdentifierType(Integer patientIdentifierTypeId) throws DAOException {
-		return (PatientIdentifierType) sessionFactory.getCurrentSession().get(PatientIdentifierType.class,
+        	return (PatientIdentifierType) sessionFactory.getCurrentSession().get(PatientIdentifierType.class,
 		    patientIdentifierTypeId);
 	}
 	
@@ -636,7 +635,7 @@ public class HibernatePatientDAO implements PatientDAO {
         @Override
 	public PatientIdentifier getPatientIdentifier(Integer patientIdentifierId) throws DAOException {
 		
-		return (PatientIdentifier) sessionFactory.getCurrentSession().get(PatientIdentifier.class, patientIdentifierId);
+        	return (PatientIdentifier) sessionFactory.getCurrentSession().get(PatientIdentifier.class, patientIdentifierId);
 		
 	}
 	

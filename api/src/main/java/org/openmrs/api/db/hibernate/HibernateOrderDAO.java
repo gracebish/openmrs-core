@@ -21,9 +21,9 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.hibernate.transform.DistinctRootEntityResultTransformer;
+import org.openmrs.CareSetting;
 import org.openmrs.Concept;
 import org.openmrs.ConceptClass;
-import org.openmrs.CareSetting;
 import org.openmrs.Encounter;
 import org.openmrs.GlobalProperty;
 import org.openmrs.Order;
@@ -51,6 +51,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
 
 
 /**
@@ -110,11 +111,9 @@ public class HibernateOrderDAO implements OrderDAO {
 	 */
 	@Override
 	public Order getOrder(Integer orderId) throws DAOException {
-		if (log.isDebugEnabled()) {
-			log.debug("getting order #" + orderId);
-		}
+		log.debug("getting order #{}", orderId);
 		
-		return (Order) sessionFactory.getCurrentSession().get(Order.class, orderId);
+			return (Order) sessionFactory.getCurrentSession().get(Order.class, orderId);
 	}
 	
 	/**
